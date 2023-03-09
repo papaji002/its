@@ -1,0 +1,187 @@
+Layouts------
+
+
+GRID VIEW
+---------------
+// Method returning Grid Widget
+Widget _buildGrid() => GridView.extent(
+	maxCrossAxisExtent: 150,
+	padding: const EdgeInsets.all(4),
+	mainAxisSpacing: 4,
+	crossAxisSpacing: 4,
+	children: _buildGridTileList(10));
+
+List<Container> _buildGridTileList(int count) => List.generate(
+	count,
+	(i) => Container(
+			width: 100,
+			height: 100,
+			color: Colors.blue,
+		));
+
+
+
+@override
+Widget build(BuildContext context) {
+	return Scaffold(
+		appBar: AppBar(
+		backgroundColor: Colors.green,
+		title: Text(widget.title),
+		),
+	
+	// Replace this section in your app
+		body: Center(child: _buildGrid()));
+}
+
+
+
+
+
+
+
+// function returning List view widget
+Widget _buildList() => ListView(
+
+		// name is a listTile widget which is defined below
+	children: [
+		name('james', 'thomas'),
+		name('Ajay', 'kumar'),
+		name('Arun', 'das'),
+		name('Roxie', 'St'),
+		name('Stanlee', 'jr'),
+		name('AMC', 'hales'),
+		Divider(),
+		name('Monty',"Chopra"),
+		name('Emmy', 'Ave'),
+		name(
+			'Chaitanya', ' kumar'),
+		name('Rio', 'St'),
+	],
+	);
+
+
+
+// name is a function returning ListTile widget
+ListTile name(String firstName, String lastName) => ListTile(
+	title: Text(firstName,
+		style: TextStyle(
+			fontWeight: FontWeight.w500,
+			fontSize: 20,
+		)),
+	subtitle: Text(lastName),
+	leading: Icon(
+		Icons.arrow_back_ios,
+		color: Colors.blue[500],
+	),
+	);
+
+
+
+@override
+Widget build(BuildContext context) {
+	return Scaffold(
+		appBar: AppBar(
+		backgroundColor: Colors.green,
+		title: Text(widget.title),
+		),
+	
+	// replace this section in your app
+		body: Center(child: _buildList()));
+}
+
+
+
+
+
+STACK VIEW
+// this function returns a stack widget
+Widget _buildStack() => Stack(
+		alignment: const Alignment(0.6, 0.6),
+		children: [
+		Container(
+			width: 150,
+			height: 150,
+			decoration: BoxDecoration(
+			color: Colors.black45,
+			shape: BoxShape.circle
+			),
+			child: Center(
+			child: Text(
+				'Mia B',
+				style: TextStyle(
+				fontSize: 20,
+				fontWeight: FontWeight.bold,
+				color: Colors.black,
+				),
+			),
+			),
+		),
+		],
+	);
+
+@override
+Widget build(BuildContext context) {
+	return Scaffold(
+		appBar: AppBar(
+		backgroundColor: Colors.green,
+		title: Text(widget.title),
+		),
+	
+	// replace this section in your app
+		body: Center(child: _buildStack()));
+}
+
+
+
+
+CARD
+
+// Function returns the SizeBox Widget inside that Card widget is present
+
+Widget _buildCard() => SizedBox(
+	height: 210,
+	child: Card(
+	elevation: 20,
+	child: Column(
+		children: [
+		ListTile(
+			title: Text('FLUTTER DEVELOPMENT',
+				style: TextStyle(fontWeight: FontWeight.w500)),
+			subtitle: Text('log writing'),
+			leading: Icon(
+			Icons.restaurant_menu,
+			color: Colors.blue[500],
+			),
+		),
+		Divider(),
+		ListTile(
+			title: Text('Noida, India',
+				style: TextStyle(fontWeight: FontWeight.w500)),
+			leading: Icon(
+			Icons.contact_phone,
+			color: Colors.blue[500],
+			),
+		),
+		ListTile(
+			title: Text('gfg@contribute.com'),
+			leading: Icon(
+			Icons.contact_mail,
+			color: Colors.blue[500],
+			),
+		),
+		],
+	),
+	),
+);
+
+@override
+Widget build(BuildContext context) {
+	return Scaffold(
+		appBar: AppBar(
+		backgroundColor: Colors.green,
+		title: Text(widget.title),
+		),
+	
+	// Replace this section in your app
+		body: Center(child: _buildCard()));
+}

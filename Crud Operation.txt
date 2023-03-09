@@ -1,0 +1,198 @@
+Controllers folder --
+
+--EmployeeController.js
+
+const Employee = require('../modules/Employee')
+
+const index = ( req , res , next ) => {
+    Employee.find()
+    .then(response => {
+        res.json({
+            response
+        })
+    })
+    .catch(error => {
+        res.json({
+            message : ' An erro occured'
+        })
+    })
+
+
+}
+
+
+const show = (req , res , next) =>{
+    let employeeID = req.body.employeeID
+    Employee.findById(employeeID)
+    .then(response => {
+        res.json({
+            response
+        })
+    })
+    .catch(error => {
+        res.json({
+            message : ' An erro occured'
+        })
+    })
+
+}
+
+
+const store = ( req , res , next) =>{
+    let employee = new Employee({
+        name : req.body.name ,
+        designation :  req.body.designation ,
+        email :req.body.email ,
+        phone :  req.body.phone,
+        age :  req.body.age
+
+    })
+    employee.save()
+    .then(response => {
+        res.json({
+            message : 'employee added succesfuly'
+        })
+    })
+    .catch(error => {
+        res.json({
+            message : ' An erro occured'
+        })
+    })
+
+}
+
+const update = (req , res , next) =>{
+    let employeeID = req.body.employeeID
+
+    let updatedData = {
+        name : req.body.name ,
+        designation :  req.body.designation ,
+        email :req.body.email ,
+        phone :  req.body.phone,
+        age :  req.body.age
+    }
+
+    Employee.findByIdAndUpdate(employeeID ,{$set : updatedData})
+    .then(response => {
+        res.json({
+            message : 'employee updated succesfuly'
+        })
+    })
+    .catch(error => {
+        res.json({
+            message : ' An erro occured'
+        })
+    })
+}
+
+
+const destroy =(req , res , next) =>{
+    let employeeID = req.body.employeeID
+    Employee.findOneAndDelete(employeeID)
+    .then(response => {
+        res.json({
+            message : 'employee deleted succesfuly'
+        })
+    })
+    .catch(error => {
+        res.json({
+            message : ' An erro occured'
+        })
+    })
+
+}
+
+module.exports={
+    index,show,store,update,destroy
+}
+
+
+
+modules folder---
+
+--Employee.js
+
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+
+const employeeSchema = new Schema({
+        name :{
+            type : String
+        },
+        designation :{
+            type : String
+        },email :{
+            type : String
+        },phone :{
+            type : String
+        },age :{
+            type : Number
+        },
+
+
+} , {timestamps : true})
+
+const Employee = mongoose.model('Employee' , employeeSchema)
+module.exports = Employee
+
+
+--routes folder--
+
+--employee.js
+
+const express = require('express')
+const router = express.Router()
+
+const EmployeeController = require('../controllers/EmployeeController')
+
+router.get('/' , EmployeeController.index)
+router.post('/show' , EmployeeController.show)
+router.post('/store' , EmployeeController.store)
+router.post('/update' , EmployeeController.update)
+router.post('/delete' , EmployeeController.destroy)
+
+
+module.exports = router
+
+
+
+--server.js
+
+
+const bodyParser = require('body-parser')
+const express = require('express')
+const mongoose = require('mongoose')
+const morgan = require('morgan')
+
+
+
+const EmployeeRoute = require('./routes/employee')
+
+mongoose.set("strictQuery", false);
+mongoose.connect('mongodb://127.0.0.1:27017/testdb' , {useNewUrlParser : true , useUnifiedTopology : true})
+const db = mongoose.connection
+
+db.on('error' , (err) =>{
+    console.log(err)
+})
+
+db.once('open' , ()=>{
+    console.log('Databse connection established')
+})
+
+
+const app = express()
+
+app.use(morgan('dev'))
+app.use(bodyParser.urlencoded({extended : true}))
+app.use(bodyParser.json())
+
+
+
+const PORT = process.env.PORT || 3000
+
+app.listen(PORT , ()=>{
+    console.log(`server is running at port ${PORT}`)
+})
+
+app.use('/api/employee' , EmployeeRoute)
