@@ -1,0 +1,84 @@
+
+
+prac 2
+import 'package:flutter/material.dart';
+
+void main() => runApp(MaterialApp(
+  home: Home(),
+));
+
+
+
+  
+class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("HIEEE SYCS"),
+        centerTitle: true,
+        backgroundColor: Colors.red[600],
+      ),
+      body: Center(
+        child: Text('starting with flutter',
+          style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 2.0,
+            color: Colors.grey[600],
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(onPressed: (){},
+        child: Text('click here'),
+        backgroundColor: Colors.red[600],
+      ),
+    );
+  }
+}
+
+
+images prac
+
+
+  
+class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("HIEEE SYCS"),
+        centerTitle: true,
+        backgroundColor: Colors.red[600],
+      ),
+      body: Center(
+        child: Image(
+          image: AssetImage('assets/butterfly.jpg' )
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(onPressed: (){},
+        child: Text('click here'),
+        backgroundColor: Colors.red[600],
+      ),
+    );
+  }
+}
+
+
+note command - assets/ can be used to call all the images in the folder
+image.asset('url') this also wil work.
+
+
+import 'package:flutter/material.dart';
+
+void main() => runApp(MaterialApp(
+  home: Home(),
+));
+
+
+
+  
