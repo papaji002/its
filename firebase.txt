@@ -230,3 +230,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
+
+
+
+
+dependencies:
+
+firebase_core:^2.5.0
+firebase_auth:^4.2.6
